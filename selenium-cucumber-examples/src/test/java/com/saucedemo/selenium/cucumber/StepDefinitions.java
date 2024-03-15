@@ -55,22 +55,32 @@ public class StepDefinitions {
             case "windows_10_edge":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_10);
                 options.get().setBrowserName(Browser.EDGE);
+                sauceOptions.sauce().setExtendedDebugging(true);
+                sauceOptions.sauce().setCapturePerformance(true);
                 break;
             case "mac_sierra_chrome":
                 options.get().setPlatformName(SaucePlatform.MAC_SIERRA);
                 options.get().setBrowserName(Browser.CHROME);
+                sauceOptions.sauce().setExtendedDebugging(true);
+                sauceOptions.sauce().setCapturePerformance(true);
                 break;
             case "windows_8_ff":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_8);
                 options.get().setBrowserName(Browser.FIREFOX);
+                sauceOptions.sauce().setExtendedDebugging(true);
+                sauceOptions.sauce().setCapturePerformance(true);
                 break;
             case "windows_8_1_ie":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_8_1);
                 options.get().setBrowserName(Browser.INTERNET_EXPLORER);
+                sauceOptions.sauce().setExtendedDebugging(true);
+                sauceOptions.sauce().setCapturePerformance(true);
                 break;
             case "mac_mojave_safari":
                 options.get().setPlatformName(SaucePlatform.MAC_MOJAVE);
                 options.get().setBrowserName(Browser.SAFARI);
+                sauceOptions.sauce().setExtendedDebugging(true);
+                sauceOptions.sauce().setCapturePerformance(true);
                 break;
             default:
                 // accept Sauce defaults
@@ -91,11 +101,13 @@ public class StepDefinitions {
     @Given("^I go to the login page$")
     public void go_to_login_page() {
         getDriver().get("https://www.saucedemo.com");
+        session.getAccessibilityResults();
     }
 
     @Given("I am on the inventory page")
     public void go_to_the_inventory_page(){
         getDriver().get("https://www.saucedemo.com/inventory.html");
+        session.getAccessibilityResults();
     }
 
     @When("I login as a valid user")
@@ -160,5 +172,6 @@ public class StepDefinitions {
     @Then("The item list is displayed")
     public void item_list_is_diplayed() {
         Assert.assertTrue(getDriver().findElement(By.id("inventory_container")).isDisplayed());
+        session.getAccessibilityResults();
     }
 }
