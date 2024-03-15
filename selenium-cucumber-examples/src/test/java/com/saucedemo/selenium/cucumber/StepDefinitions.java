@@ -34,7 +34,6 @@ public class StepDefinitions {
         return getSession().getDriver();
     }
 
-
     @Before
     public void setUp(Scenario scenario) {
         options.set(new SauceOptions());
@@ -51,36 +50,36 @@ public class StepDefinitions {
             platform = "default";
         }
 
-        switch(platform) {
+        switch (platform) {
             case "windows_10_edge":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_10);
                 options.get().setBrowserName(Browser.EDGE);
-                sauceOptions.sauce().setExtendedDebugging(true);
-                sauceOptions.sauce().setCapturePerformance(true);
+                options.get().sauce().setExtendedDebugging(true);
+                options.get().sauce().setCapturePerformance(true);
                 break;
             case "mac_sierra_chrome":
                 options.get().setPlatformName(SaucePlatform.MAC_SIERRA);
                 options.get().setBrowserName(Browser.CHROME);
-                sauceOptions.sauce().setExtendedDebugging(true);
-                sauceOptions.sauce().setCapturePerformance(true);
+                options.get().sauce().setExtendedDebugging(true);
+                options.get().sauce().setCapturePerformance(true);
                 break;
             case "windows_8_ff":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_8);
                 options.get().setBrowserName(Browser.FIREFOX);
-                sauceOptions.sauce().setExtendedDebugging(true);
-                sauceOptions.sauce().setCapturePerformance(true);
+                options.get().sauce().setExtendedDebugging(true);
+                options.get().sauce().setCapturePerformance(true);
                 break;
             case "windows_8_1_ie":
                 options.get().setPlatformName(SaucePlatform.WINDOWS_8_1);
                 options.get().setBrowserName(Browser.INTERNET_EXPLORER);
-                sauceOptions.sauce().setExtendedDebugging(true);
-                sauceOptions.sauce().setCapturePerformance(true);
+                options.get().sauce().setExtendedDebugging(true);
+                options.get().sauce().setCapturePerformance(true);
                 break;
             case "mac_mojave_safari":
                 options.get().setPlatformName(SaucePlatform.MAC_MOJAVE);
                 options.get().setBrowserName(Browser.SAFARI);
-                sauceOptions.sauce().setExtendedDebugging(true);
-                sauceOptions.sauce().setCapturePerformance(true);
+                options.get().sauce().setExtendedDebugging(true);
+                options.get().sauce().setCapturePerformance(true);
                 break;
             default:
                 // accept Sauce defaults
@@ -94,20 +93,20 @@ public class StepDefinitions {
     }
 
     @After
-    public void tearDown(Scenario scenario){
+    public void tearDown(Scenario scenario) {
         getSession().stop(!scenario.isFailed());
     }
 
     @Given("^I go to the login page$")
     public void go_to_login_page() {
         getDriver().get("https://www.saucedemo.com");
-        session.getAccessibilityResults();
+        session.get().getAccessibilityResults();
     }
 
     @Given("I am on the inventory page")
-    public void go_to_the_inventory_page(){
+    public void go_to_the_inventory_page() {
         getDriver().get("https://www.saucedemo.com/inventory.html");
-        session.getAccessibilityResults();
+        session.get().getAccessibilityResults();
     }
 
     @When("I login as a valid user")
@@ -121,8 +120,11 @@ public class StepDefinitions {
     }
 
     /**
-     * Use this method to send any number of login/password parameters, to test different edge cases or roles within
-     * the software. This method exists to show an example of how steps can call other parameterized methods.
+     * Use this method to send any number of login/password parameters, to test
+     * different edge cases or roles within
+     * the software. This method exists to show an example of how steps can call
+     * other parameterized methods.
+     * 
      * @param username The user name to login with
      * @param password The password to use (for testing the password field
      */
@@ -137,7 +139,7 @@ public class StepDefinitions {
     }
 
     @When("^I add (\\d+) items? to the cart$")
-    public void add_items_to_cart(int items){
+    public void add_items_to_cart(int items) {
         By itemButton = By.className("btn_primary");
 
         IntStream.range(0, items).forEach(i -> {
@@ -147,7 +149,7 @@ public class StepDefinitions {
     }
 
     @And("I remove an item")
-    public void remove_an_item(){
+    public void remove_an_item() {
         By itemButton = By.className("btn_secondary");
 
         wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(itemButton)));
@@ -172,6 +174,6 @@ public class StepDefinitions {
     @Then("The item list is displayed")
     public void item_list_is_diplayed() {
         Assert.assertTrue(getDriver().findElement(By.id("inventory_container")).isDisplayed());
-        session.getAccessibilityResults();
+        session.get().getAccessibilityResults();
     }
 }

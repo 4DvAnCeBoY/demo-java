@@ -1,4 +1,4 @@
-package com.saucedemo.selenium.demo;
+package com.saucedemo.selenium;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
